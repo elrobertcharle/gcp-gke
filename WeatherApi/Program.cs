@@ -1,8 +1,21 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using WeatherApi.Options;
+using WeatherDb;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+var postgresOptions = new PostgresDbOptions();
+builder.Configuration.GetSection("Db").Bind(postgresOptions);
+var connectionString = PostgresDbOptions.GetConnectionString(postgresOptions);
+Action<DbContextOptionsBuilder> configureDbContextPsql = ob => ob.UseNpgsql(connectionString);
+
+builder.Services.AddDbContext<WeatherDbContext>(configureDbContextPsql);
+
 
 var app = builder.Build();
 
