@@ -4,6 +4,8 @@ services:
     container_name: weather_api
     networks:
       - weather
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
     ports:
       - "7170:8080"
 

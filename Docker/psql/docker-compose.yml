@@ -7,6 +7,8 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: pass#4o&6
       POSTGRES_DB: Weather
+    networks:
+      - weather  
     ports:
       - "5532:5432"
     volumes:
@@ -14,3 +16,7 @@ services:
 
 volumes:
   postgres_data:
+
+networks:
+  weather:
+    external: true
