@@ -12,7 +12,7 @@ namespace WeatherDb
     {
         public WeatherDbContext(DbContextOptions options) : base(options)
         {
-
+            // dotnet ef migrations add InitialCreate --project WeatherDb --startup-project Weather
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

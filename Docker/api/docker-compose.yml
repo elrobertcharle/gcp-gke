@@ -1,0 +1,12 @@
+services:
+  app1:
+    image: weather_api:1.0
+    container_name: weather_api
+    networks:
+      - weather
+    ports:
+      - "7170:8080"
+
+networks:
+  weather:
+    external: true
