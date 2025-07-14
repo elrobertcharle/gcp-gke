@@ -1,0 +1,11 @@
+copiar la imagen para Minikube:
+minikube image load weather_api:1.0
+
+
+port forward
+
+kubectl port-forward <service-name> <local-port>:<service-port>
+kubectl port-forward svc/postgres-service 5432:5432
+
+migrations:
+dotnet ef migrations script --idempotent -o .\WeatherDb\Migrations_Script\migration.sql --project .\WeatherDb --startup-project .\WeatherApi
