@@ -1,0 +1,14 @@
+# .dockerignore
+
+bin/
+obj/
+.git/
+
+
+# Exclude Docker-related files
+Dockerfile
+.dockerignore
+Makefile
+K8s
+Docker
+.gitignore
