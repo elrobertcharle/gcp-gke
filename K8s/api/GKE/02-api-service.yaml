@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: weather-api-service
+  annotations:
+    # This annotation links the service to the BackendConfig
+    cloud.google.com/backend-config: '{"default": "weather-api-backendconfig"}'
+spec:
+  # Use LoadBalancer to expose the service to the internet
+  type: ClusterIP
+  selector:
+    app: weather-api
+  ports:
+    - protocol: TCP
+      # The port the Load Balancer will listen on
+      port: 80
+      # The port on the container to send traffic to
+      targetPort: 8080

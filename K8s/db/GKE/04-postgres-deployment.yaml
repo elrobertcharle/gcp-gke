@@ -19,6 +19,14 @@ spec:
         image: postgres:17
         ports:
         - containerPort: 5432
+        # --- START OF ADDITION ---
+        resources:
+          requests:
+            # Request 1/4 of a CPU core. This is a good starting point.
+            cpu: "250m"
+            # Request 512 Mebibytes of RAM.
+            memory: "512Mi"
+        # --- END OF ADDITION ---
         env:
         - name: POSTGRES_USER
           value: "admin"
@@ -29,9 +37,9 @@ spec:
               name: postgres-secret
         volumeMounts:
             - name: postgres-storage
-              mountPath: /var/lib/postgresql/data  
+              mountPath: /var/lib/postgresql/data
+              subPath: postgres-data
       volumes:
         - name: postgres-storage
           persistentVolumeClaim:
             claimName: postgres-pvc
-
