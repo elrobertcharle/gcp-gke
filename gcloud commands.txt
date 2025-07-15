@@ -64,4 +64,6 @@ gcloud container clusters list
 //delete cluster
 gcloud container clusters delete weather-cluster --region "us-central1"
 
+gcloud compute addresses list
+
 
