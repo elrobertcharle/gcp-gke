@@ -1,0 +1,12 @@
+services:
+  app1:
+    image: weather_api_migrations:1.0
+    container_name: weather_api_migrations
+    networks:
+      - weather
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+
+networks:
+  weather:
+    external: true

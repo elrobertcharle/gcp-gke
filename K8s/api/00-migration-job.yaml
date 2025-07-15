@@ -1,0 +1,32 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: weather-api-migration-v1
+spec:
+  template:
+    spec:
+      containers:
+      - name: migration-runner
+        # Apunta a la imagen que creaste con el 'efbundle'
+        image: us-central1-docker.pkg.dev/weather-4cee/weather-4cee-repo/weather_migrations:1.0 
+        
+        # --- INICIO DE LA MODIFICACIÓN ---
+        # Sobrescribimos el ENTRYPOINT para usar un shell
+        command: ["/bin/sh", "-c"]
+        # Construimos la cadena de conexión y la pasamos como argumento
+        args:
+        - "/app/efbundle --connection \"Host=$(DB_HOST);Database=$(DB_NAME);Username=$(DB_USER);Password=$(DB_PASS)\""
+        # --- FIN DE LA MODIFICACIÓN ---
+
+        env:
+        # Estas variables son usadas por el comando de arriba
+        - name: DB_HOST
+          value: "postgres-service"
+        - name: DB_USER
+          value: "admin"
+        - name: DB_NAME
+          value: "Weather"
+        - name: DB_PASS
+          value: "pass#4o&6"
+      restartPolicy: Never
+  backoffLimit: 2

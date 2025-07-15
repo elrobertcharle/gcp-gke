@@ -8,6 +8,7 @@ gcloud services enable <api-name>
 //examples:
 //gcloud services enable container.googleapis.com
 //gcloud services enable artifactregistry.googleapis.com
+gcloud artifacts repositories list
 
 //enable a service
 gcloud services enable [API_NAME]
@@ -32,4 +33,16 @@ gcloud container clusters create-auto "weather-cluster" --region "us-central1"
 
 
 
+docker tag weather_api:1.0 us-central1-docker.pkg.dev/weather-4cee/weather-4cee-repo/weather_api:1.0
+docker push us-central1-docker.pkg.dev/weather-4cee/weather-4cee-repo/weather_api:1.0
+
+
+//delete existing artifacts in the repo:
+gcloud artifacts docker images delete us-central1-docker.pkg.dev/weather-4cee/weather-4cee-repo/weather_api:1.0 --delete-tags
+gcloud artifacts docker images delete us-central1-docker.pkg.dev/weather-4cee/weather-4cee-repo/weather_api@sha256:e7e8a97e9019591b23f6230d63c4440a9e451584e797f50c0dc33c3b67dee722 --quiet
+gcloud artifacts docker images delete us-central1-docker.pkg.dev/weather-4cee/weather-4cee-repo/weather_api@sha256:0be485aad318b4cf107711bc6a2628adfaf55bbadcd7680bd635885b8ae02877 --quiet
+
+
+//check ingress health
+kubectl get ingress weather-api-ingress
 
