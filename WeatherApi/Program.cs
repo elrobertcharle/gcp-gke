@@ -71,6 +71,8 @@ app.MapPost("/weatherforecast", async (WeatherForecast requestBody, WeatherDb.We
 })
 .WithName("PostWeatherForecast");
 
+app.MapGet("/healthz", () => Results.Ok("Healthy"));
+
 app.Run();
 
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)

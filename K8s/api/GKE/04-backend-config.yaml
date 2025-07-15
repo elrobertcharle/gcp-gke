@@ -8,4 +8,4 @@ spec:
     checkIntervalSec: 15
     port: 8080
     type: HTTP
-    requestPath: /weatherforecast
+    requestPath: /healthz
