@@ -8,13 +8,19 @@ gcloud services enable <api-name>
 //examples:
 //gcloud services enable container.googleapis.com
 //gcloud services enable artifactregistry.googleapis.com
+
+//listar artifacts
 gcloud artifacts repositories list
+
+//delete repo
+gcloud artifacts repositories delete <repo-name> --location=us-central1 --quiet
 
 //enable a service
 gcloud services enable [API_NAME]
 
 //artifact registry
 //create a repo
+//step 3
 gcloud artifacts repositories create weather-4cee-repo --repository-format=docker --location=us-central1 --description="My weather project"
 
 gcloud auth configure-docker us-central1-docker.pkg.dev
@@ -24,18 +30,20 @@ gcloud auth configure-docker us-central1-docker.pkg.dev
 
 gcloud components install gke-gcloud-auth-plugin
 then
+//step 2
 gcloud container clusters get-credentials <cluster name> --location=us-central1
 //Running gcloud container clusters get-credentials does one critical thing: it configures your kubectl command-line tool to connect to your new cluster.
 
 
-then create the cluster
+//step 1
 gcloud container clusters create-auto "weather-cluster" --region "us-central1"
 
 
 
 docker tag weather_api:1.0 us-central1-docker.pkg.dev/weather-4cee/weather-4cee-repo/weather_api:1.0
-docker push us-central1-docker.pkg.dev/weather-4cee/weather-4cee-repo/weather_api:1.0
 
+//step 4
+docker push us-central1-docker.pkg.dev/weather-4cee/weather-4cee-repo/weather_api:1.0
 docker push us-central1-docker.pkg.dev/weather-4cee/weather-4cee-repo/weather_api_migrations:1.0
 
 
@@ -50,5 +58,10 @@ gcloud artifacts docker images delete us-central1-docker.pkg.dev/weather-4cee/we
 //check ingress health
 kubectl get ingress weather-api-ingress
 
+//list clusters
+gcloud container clusters list
+
+//delete cluster
+gcloud container clusters delete weather-cluster --region "us-central1"
 
 
