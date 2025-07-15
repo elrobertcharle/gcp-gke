@@ -36,6 +36,10 @@ gcloud container clusters create-auto "weather-cluster" --region "us-central1"
 docker tag weather_api:1.0 us-central1-docker.pkg.dev/weather-4cee/weather-4cee-repo/weather_api:1.0
 docker push us-central1-docker.pkg.dev/weather-4cee/weather-4cee-repo/weather_api:1.0
 
+docker push us-central1-docker.pkg.dev/weather-4cee/weather-4cee-repo/weather_api_migrations:1.0
+
+
+gcloud artifacts docker images list us-central1-docker.pkg.dev/weather-4cee/weather-4cee-repo
 
 //delete existing artifacts in the repo:
 gcloud artifacts docker images delete us-central1-docker.pkg.dev/weather-4cee/weather-4cee-repo/weather_api:1.0 --delete-tags
@@ -45,4 +49,6 @@ gcloud artifacts docker images delete us-central1-docker.pkg.dev/weather-4cee/we
 
 //check ingress health
 kubectl get ingress weather-api-ingress
+
+
 

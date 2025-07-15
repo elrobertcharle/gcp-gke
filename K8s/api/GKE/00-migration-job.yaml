@@ -8,7 +8,7 @@ spec:
       containers:
       - name: migration-runner
         # Apunta a la imagen que creaste con el 'efbundle'
-        image: weather_api_migrations:1.0 
+        image: us-central1-docker.pkg.dev/weather-4cee/weather-4cee-repo/weather_api_migrations:1.0 
         resources:
           requests:
             cpu: "250m"
