@@ -13,7 +13,7 @@ gcloud services enable <api-name>
 gcloud artifacts repositories list
 
 //delete repo
-gcloud artifacts repositories delete <repo-name> --location=us-central1 --quiet
+gcloud artifacts repositories delete weather-4cee-repo --location=us-central1 --quiet
 
 //enable a service
 gcloud services enable [API_NAME]

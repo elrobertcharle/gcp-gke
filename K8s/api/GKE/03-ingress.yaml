@@ -3,11 +3,11 @@ kind: Ingress
 metadata:
   name: weather-api-ingress
   annotations:
-    # Use the deprecated annotation because your cluster is missing the IngressClass
-    kubernetes.io/ingress.class: "gce"
+    kubernetes.io/ingress.class: gce
 spec:
   rules:
-  - http:
+  - host: weather.localtest.me
+    http:
       paths:
       - path: /
         pathType: Prefix
