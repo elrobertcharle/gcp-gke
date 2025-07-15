@@ -1,5 +1,5 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using WeatherApi.Options;
 using WeatherDb;
 
@@ -46,15 +46,28 @@ app.MapGet("/weatherforecast", () =>
 })
 .WithName("GetWeatherForecast");
 
+app.MapGet("/weatherforecast/{id:int}", async ([FromRoute] int id, WeatherDb.WeatherDbContext context) =>
+{
+    var item = await context.WeatherForecasts.FirstOrDefaultAsync(x => x.Id == id);
+    if (item == null)
+        return Results.NotFound();
+
+    return Results.Ok(item);
+})
+.WithName("GetWeatherForecastById");
+
 app.MapPost("/weatherforecast", async (WeatherForecast requestBody, WeatherDb.WeatherDbContext context) =>
 {
-    context.WeatherForecasts.Add(new WeatherForecastEntity
+    var item = new WeatherForecastEntity
     {
         Summary = requestBody.Summary,
         Date = requestBody.Date,
         TemperatureC = requestBody.TemperatureC
-    });
+    };
+    context.WeatherForecasts.Add(item);
     await context.SaveChangesAsync();
+
+    return Results.Ok(item.Id);
 })
 .WithName("PostWeatherForecast");
 
