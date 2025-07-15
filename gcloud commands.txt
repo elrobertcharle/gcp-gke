@@ -1,0 +1,35 @@
+gcloud projects list
+gcloud config list
+gcloud config set project <project-id>
+
+list anabled services only
+gcloud services list --enabled
+gcloud services enable <api-name> 
+//examples:
+//gcloud services enable container.googleapis.com
+//gcloud services enable artifactregistry.googleapis.com
+
+//enable a service
+gcloud services enable [API_NAME]
+
+//artifact registry
+//create a repo
+gcloud artifacts repositories create weather-4cee-repo --repository-format=docker --location=us-central1 --description="My weather project"
+
+gcloud auth configure-docker us-central1-docker.pkg.dev
+//this config docker to push images to that region
+//message: After update, the following will be written to your Docker config file located at [C:\Users\elrob\.docker\config.json]
+
+
+gcloud components install gke-gcloud-auth-plugin
+then
+gcloud container clusters get-credentials <cluster name> --location=us-central1
+//Running gcloud container clusters get-credentials does one critical thing: it configures your kubectl command-line tool to connect to your new cluster.
+
+
+then create the cluster
+gcloud container clusters create-auto "weather-cluster" --region "us-central1"
+
+
+
+

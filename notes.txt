@@ -9,3 +9,8 @@ kubectl port-forward svc/postgres-service 5432:5432
 
 migrations:
 dotnet ef migrations script --idempotent -o .\WeatherDb\Migrations_Script\migration.sql --project .\WeatherDb --startup-project .\WeatherApi
+
+
+// see or manage Minikube docker images
+eval $(minikube docker-env)
+docker images
