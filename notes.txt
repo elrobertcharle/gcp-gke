@@ -14,3 +14,4 @@ dotnet ef migrations script --idempotent -o .\WeatherDb\Migrations_Script\migrat
 // see or manage Minikube docker images
 eval $(minikube docker-env)
 docker images
+
